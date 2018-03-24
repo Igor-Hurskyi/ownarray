@@ -9,5 +9,6 @@ public class Test {
         mylist.addToStart(6);
         mylist.showElement(0);
         System.out.println("HELLO");
+        System.out.println("darova");
     }
 }
