@@ -8,5 +8,6 @@ public class Test {
         MyArrayList<Integer> mylist = new MyArrayList<>(5);
         mylist.addToStart(6);
         mylist.showElement(0);
+        System.out.println("HELLO");
     }
 }
