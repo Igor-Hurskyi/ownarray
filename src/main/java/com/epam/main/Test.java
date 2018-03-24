@@ -10,5 +10,6 @@ public class Test {
         mylist.showElement(0);
         System.out.println("HELLO");
         System.out.println("darova");
+        System.out.println("karova");
     }
 }
