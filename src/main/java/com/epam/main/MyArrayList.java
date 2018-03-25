@@ -18,6 +18,7 @@ package com.epam.main;
       В меню добавить пункт вывода логов в консоль
  */
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class MyArrayList<E> {
     public MyArrayList(int capacity) {
         logger.info(capacity);
 
-        if(capacity > 0) {
+        if (capacity > 0) {
             elements = new Object[capacity];
         } else {
             throw new IllegalArgumentException("Illegal Capacity: "
@@ -66,29 +67,38 @@ public class MyArrayList<E> {
     }
 
     public void displayElements() {
-        for (Object obj: elements) {
-            System.out.println(obj);
+        for (Object obj : elements) {
+            System.out.print(obj + " ");
         }
+        System.out.println();
     }
 
     public void displayElementsReversed() {
-        for(int i = elements.length; i >= 0; i--) {
-            System.out.println(elements[i]);
+        for (int i = elements.length; i >= 0; i--) {
+            System.out.print(elements[i] + " ");
         }
+        System.out.println();
     }
 
     public void sort() {
         Arrays.sort(elements);
     }
 
-    public void findNulls () {
-
+    public boolean isArrayEmpty() {
+        for (Object obj : elements) {
+            if (obj == null) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int elementOccurrences(E obj) {
         int occurrences = 0;
-        for(Object object : elements) {
-            if(obj.equals(object)) {
+        for (Object object : elements) {
+            if (obj.equals(object)) {
                 occurrences++;
             }
         }
@@ -97,6 +107,10 @@ public class MyArrayList<E> {
 
     public void showElement(int index) {
         System.out.println(elements[index]);
+    }
+
+    public int arrayLength() {
+        return elements.length;
     }
 
 

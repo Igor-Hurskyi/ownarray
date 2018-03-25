@@ -5,8 +5,9 @@ import com.epam.main.MyArrayList;
 public class Test {
 
     public static void main(String[] args) {
-        MyArrayList<Integer> mylist = new MyArrayList<>(5);
+        MyArrayList<Integer> mylist = new MyArrayList<>(10);
         mylist.addToStart(6);
-        mylist.showElement(0);
+        mylist.displayElements();
+        System.out.println();
     }
 }
