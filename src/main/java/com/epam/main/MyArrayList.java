@@ -18,20 +18,26 @@ package com.epam.main;
       В меню добавить пункт вывода логов в консоль
  */
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
 
 public class MyArrayList<E> {
 
-    final static Logger logger = Logger.getLogger(MyArrayList.class);
+    private static final Logger logger = Logger.getLogger(MyArrayList.class);
+
+    private static final int DEFAULT_SIZE = 10;
 
     private Object[] elements; //Чому тут object, a не E[]?
 
+    public MyArrayList() {
+        logger.info("default size");
+        elements = new Object[DEFAULT_SIZE];
+    }
+
     public MyArrayList(int capacity) {
         logger.info(capacity);
-
         if (capacity > 0) {
             elements = new Object[capacity];
         } else {
@@ -40,51 +46,70 @@ public class MyArrayList<E> {
         }
     }
 
-    public void addToStart(E obj) {
+    public void addFirst(E obj) {
         logger.info(obj);
-
         elements[0] = obj;
     }
 
-    public void addtoEnd(E obj) {
-        elements[elements.length - 1] = obj;
+    public void addLast(E obj) {
+        logger.info(obj);
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i] != null) {
+                continue;
+            } else {
+                elements[i] = obj;
+                break;
+            }
+        }
     }
 
     public void set(int index, E obj) {
+        logger.info(String.format("index: %s, object: %s", index, obj));
         elements[index] = obj;
     }
 
     public void delete(int index) {
+        logger.info(index);
         elements[index] = null;
+        System.arraycopy(elements, index + 1, elements, index, elements.length - (index + 1));
+        trimToSize(elements.length - 1);
     }
 
     public void extendToSize(int size) {
-
+        if (size < elements.length) return;
+        logger.info(size);
+        elements = Arrays.copyOf(elements, size);
     }
 
     public void trimToSize(int size) {
-        //elements = size;
+        if (size > elements.length) return;
+        logger.info(size);
+        elements = Arrays.copyOf(elements, size);
     }
 
     public void displayElements() {
+        logger.info("no data");
         for (Object obj : elements) {
-            System.out.print(obj + " ");
+            System.out.print("[" + obj + "] ");
         }
         System.out.println();
     }
 
     public void displayElementsReversed() {
-        for (int i = elements.length; i >= 0; i--) {
-            System.out.print(elements[i] + " ");
+        logger.info("no data");
+        for (int i = elements.length-1; i >= 0; i--) {
+            System.out.print("[" + elements[i] + "] ");
         }
         System.out.println();
     }
 
     public void sort() {
+        logger.info("no data");
         Arrays.sort(elements);
     }
 
     public boolean isArrayEmpty() {
+        logger.info("no data");
         for (Object obj : elements) {
             if (obj == null) {
                 continue;
@@ -96,6 +121,7 @@ public class MyArrayList<E> {
     }
 
     public int elementOccurrences(E obj) {
+        logger.info(obj);
         int occurrences = 0;
         for (Object object : elements) {
             if (obj.equals(object)) {
@@ -105,13 +131,9 @@ public class MyArrayList<E> {
         return occurrences;
     }
 
-    public void showElement(int index) {
-        System.out.println(elements[index]);
+    public void enableLogs(boolean logging) {
+        if (logging == false) {
+        logger.setLevel(Level.FATAL);
+        }
     }
-
-    public int arrayLength() {
-        return elements.length;
-    }
-
-
 }
