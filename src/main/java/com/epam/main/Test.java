@@ -112,10 +112,12 @@ public class Test {
                         myList.enableLogs(logging);
                         String logStatus;
                         logStatus = logging ? "enabled" : "disabled";
-                        System.out.println("Logging is: " + logStatus);
+                        System.out.println("Logging " + logStatus);
+                        break;
                     }
                     default: {
                         System.out.println("Wrong argument");
+                        break;
                     }
                 }
             }
